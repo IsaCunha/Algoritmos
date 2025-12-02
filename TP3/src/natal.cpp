@@ -5,7 +5,7 @@ using namespace std;
 
 void conjunto_independente(int indice, int fim, 
     vector<int>& conjunto_parcial,
-    bool matriz[41][41], 
+    vector<vector<bool>>& matriz, 
     vector<vector<int>>& resultado) {
     
 
@@ -33,8 +33,8 @@ void conjunto_independente(int indice, int fim,
 
 }
 
-bool sem_briga(int indice, const vector<int>& conjunto_parcial, bool matriz[41][41]){
-    for(int i = 0; i < conjunto_parcial.size(); i++) {
+bool sem_briga(int indice, const vector<int>& conjunto_parcial, vector<vector<bool>>& matriz){
+    for(size_t i = 0; i < conjunto_parcial.size(); i++) {
         if(matriz[indice][conjunto_parcial[i]] == false) {
             return false; 
         }

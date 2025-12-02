@@ -4,43 +4,60 @@
 
 using namespace std;
 
-const max_duendes = 41;
-bool matriz_relacoes[max_duendes][max_duendes];
-
 int main() {
 
     int duendes, brigas;
     cin >> duendes >> brigas;
 
-    // preenche a matriz completa com 'true', indicando que aquele par de duendes tem boa relação
-    memset(matriz_relacoes, true, sizeof(matriz_relacoes));
+    vector <vector<bool>> relacoes(duendes, vector<bool>(duendes, true)); 
+
     int brigao1, brigao2;
+/*
+    cout << "Momento 1: " << endl;
+
+    for(int i = 0; i < duendes; i++) {
+        for(int j = 0; j < duendes; j++) {
+            cout << "[" << i << j << "]: " << relacoes[i][j] << " " ;
+        }
+    }
+    cout << " " << endl;
+*/    
     
     for(int i = 0; i < brigas; i++) {
         
         cin >> brigao1 >> brigao2;
-        matriz_relacoes[brigao1][brigao2] = false;
-        matriz_relacoes[brigao2][brigao1] = false; 
+        relacoes[brigao1][brigao2] = false;
+        relacoes[brigao2][brigao1] = false; 
 
     }
+
+/*
+    cout << "Matriz 2: " << endl;
+    for(int i = 0 ; i < duendes; i++) {
+        for(int j = 0; j < duendes; j++) {
+            cout << "[" << i << j << "]: " << relacoes[i][j] << " " ;
+        }
+    }
+*/
 
     int meio = (duendes - 1) / 2;
 
     int grupo1 = meio + 1;
-    int grupo2 = duendes - grupo1; 
-    
     
     vector<int> equipe_parcial;
     vector<vector<int>> equipe1, equipe2;
 
-    conjunto_independente(0, grupo1, equipe_parcial, matriz_relacoes, equipe1);
-    conjunto_independente(grupo1, duendes, equipe_parcial, matriz_relacoes, equipe2);
+    conjunto_independente(0, grupo1, equipe_parcial, relacoes, equipe1);
+    conjunto_independente(grupo1 + 1, duendes, equipe_parcial, relacoes, equipe2);
 
-    int totalEquipe;
+    int totalEquipe = 0;
     vector<int> resultado;
 
-    cout << totalEquipe << "\n" << endl;
+    cout << totalEquipe << endl;
     for(int i = 0; i < totalEquipe; i++) {
         cout << resultado[i] << " " <<endl;
     }
+
+    
+    
 }
